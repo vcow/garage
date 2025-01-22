@@ -1,12 +1,12 @@
-using ModestTree;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 namespace Character
 {
 	[DisallowMultipleComponent, RequireComponent(typeof(NavMeshAgent))]
-	public sealed class CharacterController : MonoBehaviour
+	public sealed class CharacterNavigationController : MonoBehaviour
 	{
 		[SerializeField] private Transform _lookAtTarget;
 		[SerializeField] private float _rotationSpeed = 1f;

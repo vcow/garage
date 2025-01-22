@@ -1,3 +1,4 @@
+using Signals;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace GameScene
 	{
 		public override void InstallBindings()
 		{
+			Container.DeclareSignal<InteractableHitSignal>();
+			Container.DeclareSignal<InteractableLoseSignal>();
 		}
 	}
 }
