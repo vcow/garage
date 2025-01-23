@@ -10,6 +10,7 @@ namespace Character
 	[DisallowMultipleComponent]
 	public sealed class CharacterAimController : MonoBehaviour
 	{
+		[field: SerializeField] public Rigidbody Rigidbody { get; private set; }
 		[SerializeField] private Transform _lookAtTarget;
 		[SerializeField] private float _touchDistanse;
 
@@ -18,6 +19,7 @@ namespace Character
 		private Camera _camera;
 		private BaseInteractableObject _interactableObject;
 		private bool _canInteract;
+		private Vector3 _hitPoint;
 
 		private void Awake()
 		{
@@ -56,7 +58,8 @@ namespace Character
 			}
 			else
 			{
-				var canInteract = CheckCanInteraction(hitInfo.point, newInteractableObject);
+				_hitPoint = hitInfo.point;
+				var canInteract = CheckCanInteraction(_hitPoint, newInteractableObject);
 				if (canInteract && !_canInteract)
 				{
 					_signalBus.TryFire(new CanInteractSignal(newInteractableObject));
@@ -88,12 +91,12 @@ namespace Character
 
 		public void OnTapAction(InputAction.CallbackContext context)
 		{
-			if (!_canInteract || !_interactableObject)
+			if (context.phase != InputActionPhase.Started || !_canInteract || !_interactableObject)
 			{
 				return;
 			}
 
-			_signalBus.TryFire(new InteractSignal(_interactableObject, gameObject));
+			_signalBus.TryFire(new InteractSignal(_interactableObject, gameObject, _hitPoint));
 		}
 
 		private bool CheckCanInteraction(Vector3 hitPoint, BaseInteractableObject interactableObject)

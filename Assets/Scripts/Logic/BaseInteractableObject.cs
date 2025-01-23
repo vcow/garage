@@ -25,10 +25,10 @@ namespace Logic
 		{
 			if (signal.InteractableObject == this)
 			{
-				Interact(signal.Character);
+				Interact(signal.HitPoint, signal.Character);
 			}
 		}
 
-		protected abstract void Interact(GameObject character);
+		protected abstract void Interact(Vector3 hitPoint, GameObject character);
 	}
 }

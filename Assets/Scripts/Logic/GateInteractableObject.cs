@@ -30,14 +30,14 @@ namespace Logic
 					{
 						if (parentIsOpened && !_isOpened.Value)
 						{
-							Interact(null);
+							Interact(Vector3.zero, null);
 						}
 					})
 					.AddTo(_disposables);
 			}
 		}
 
-		protected override void Interact(GameObject _)
+		protected override void Interact(Vector3 hitPont, GameObject character)
 		{
 			if (_parent)
 			{
