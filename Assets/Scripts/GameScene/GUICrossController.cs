@@ -12,7 +12,7 @@ namespace GameScene
 		[SerializeField] private Color _activeColor;
 		[SerializeField] private Color _inactiveColor;
 
-		[Inject] private SignalBus _signalBus;
+		[Inject] private readonly SignalBus _signalBus;
 
 		private void Start()
 		{

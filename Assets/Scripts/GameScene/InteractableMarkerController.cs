@@ -12,7 +12,7 @@ namespace GameScene
 	{
 		[SerializeField] private TextMeshProUGUI _interactableName;
 
-		[Inject] private SignalBus _signalBus;
+		[Inject] private readonly SignalBus _signalBus;
 
 		private Vector3 _labelOffset;
 		private Transform _interactable;

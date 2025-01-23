@@ -25,9 +25,9 @@
                 },
                 {
                     "name": "Point",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "da856c01-555d-49e9-a555-3184392b10ac",
-                    "expectedControlType": "Touch",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -125,7 +125,7 @@
                 {
                     "name": "",
                     "id": "3f239285-c77d-4270-8911-d9fda435bde9",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -136,8 +136,8 @@
                 {
                     "name": "",
                     "id": "2fa4cc0e-73a4-407b-acdf-c74114e8f8c3",
-                    "path": "<Touchscreen>/primaryTouch",
-                    "interactions": "",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Point",

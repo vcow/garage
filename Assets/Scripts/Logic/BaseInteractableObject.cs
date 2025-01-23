@@ -9,7 +9,7 @@ namespace Logic
 	{
 		[field: SerializeField] public string Name { get; private set; }
 
-		[Inject] private SignalBus _signalBus;
+		[Inject] private readonly SignalBus _signalBus;
 
 		protected virtual void Start()
 		{

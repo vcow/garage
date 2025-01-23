@@ -1,5 +1,6 @@
 using Character;
 using UnityEngine;
+using Zenject;
 
 namespace Logic
 {
@@ -9,7 +10,19 @@ namespace Logic
 		[SerializeField] private float _breakForce = 5000;
 		[SerializeField] private float _damper = 200;
 
+		[Inject] private readonly IGameLogic _gameLogic;
+
+		private static int _ctr;
+
 		private ConfigurableJoint _joint;
+
+		public int InteractableId { get; } = _ctr++;
+
+		protected override void Start()
+		{
+			_gameLogic.RegisterInteractableObject(this);
+			base.Start();
+		}
 
 		protected override void Interact(Vector3 hitPoint, GameObject character)
 		{
