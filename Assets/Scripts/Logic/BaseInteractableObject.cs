@@ -1,4 +1,3 @@
-using System;
 using Signals;
 using UnityEngine;
 using Zenject;
@@ -12,12 +11,12 @@ namespace Logic
 
 		[Inject] private SignalBus _signalBus;
 
-		protected void Start()
+		protected virtual void Start()
 		{
 			_signalBus.Subscribe<InteractSignal>(OnInteract);
 		}
 
-		protected void OnDestroy()
+		protected virtual void OnDestroy()
 		{
 			_signalBus.Unsubscribe<InteractSignal>(OnInteract);
 		}
