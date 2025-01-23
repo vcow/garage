@@ -15,7 +15,7 @@ namespace Logic
 
 		public bool IsOpened { get; private set; }
 
-		public override void Interact()
+		protected override void Interact(GameObject _)
 		{
 			var ang = IsOpened ? _closeAngle : _openAngle;
 			var duration = IsOpened ? CloseDuration : OpenDuration;

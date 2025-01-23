@@ -1,4 +1,7 @@
+using System;
+using Signals;
 using UnityEngine;
+using Zenject;
 
 namespace Logic
 {
@@ -7,6 +10,26 @@ namespace Logic
 	{
 		[field: SerializeField] public string Name { get; private set; }
 
-		public abstract void Interact();
+		[Inject] private SignalBus _signalBus;
+
+		protected void Start()
+		{
+			_signalBus.Subscribe<InteractSignal>(OnInteract);
+		}
+
+		protected void OnDestroy()
+		{
+			_signalBus.Unsubscribe<InteractSignal>(OnInteract);
+		}
+
+		private void OnInteract(InteractSignal signal)
+		{
+			if (signal.InteractableObject == this)
+			{
+				Interact(signal.Character);
+			}
+		}
+
+		protected abstract void Interact(GameObject character);
 	}
 }

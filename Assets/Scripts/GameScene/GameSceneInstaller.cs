@@ -11,6 +11,8 @@ namespace GameScene
 		{
 			Container.DeclareSignal<InteractableHitSignal>();
 			Container.DeclareSignal<InteractableLoseSignal>();
+			Container.DeclareSignal<CanInteractSignal>();
+			Container.DeclareSignal<InteractSignal>();
 		}
 	}
 }

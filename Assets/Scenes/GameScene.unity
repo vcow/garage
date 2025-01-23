@@ -1492,7 +1492,7 @@ Transform:
   m_GameObject: {fileID: 968218551}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 0.3, z: -100}
+  m_LocalPosition: {x: -100, y: 0.31, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1988,6 +1988,7 @@ GameObject:
   - component: {fileID: 1352584216}
   - component: {fileID: 1352584218}
   - component: {fileID: 1352584217}
+  - component: {fileID: 1352584219}
   m_Layer: 5
   m_Name: Cross
   m_TagString: Untagged
@@ -2027,7 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2509804}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2052,6 +2053,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352584215}
   m_CullTransparentMesh: 1
+--- !u!114 &1352584219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352584215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee5edcb095c4f6d8536476a44a1bd49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cross: {fileID: 1352584217}
+  _activeColor: {r: 1, g: 0.36666667, b: 0, a: 1}
+  _inactiveColor: {r: 1, g: 1, b: 1, a: 0.25490198}
 --- !u!1 &1375393438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2337,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b7b34a82-62c4-4d3f-9d3b-4df3305fedf4
     m_ActionName: Navigation/Rotation[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1502368573}
+        m_TargetAssemblyTypeName: Character.CharacterAimController, Assembly-CSharp
+        m_MethodName: OnTapAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da856c01-555d-49e9-a555-3184392b10ac
+    m_ActionName: Navigation/Point[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Navigation
@@ -2339,7 +2371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lookAtTarget: {fileID: 758890702}
-  _touchDistanse: 0
+  _touchDistanse: 6
 --- !u!1001 &1525949189
 PrefabInstance:
   m_ObjectHideFlags: 0

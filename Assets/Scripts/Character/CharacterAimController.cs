@@ -17,6 +17,7 @@ namespace Character
 
 		private Camera _camera;
 		private BaseInteractableObject _interactableObject;
+		private bool _canInteract;
 
 		private void Awake()
 		{
@@ -32,30 +33,78 @@ namespace Character
 			{
 				if (_interactableObject)
 				{
+					if (_canInteract)
+					{
+						_canInteract = false;
+						_signalBus.TryFire(new CanInteractSignal(null));
+					}
+
 					OnLostInteractable();
 				}
 
 				return;
 			}
 
-			if (_interactableObject)
+			var newInteractableObject = hitInfo.collider.GetComponent<BaseInteractableObject>();
+			if (!newInteractableObject)
 			{
-				OnLostInteractable();
-			}
-
-			_interactableObject = hitInfo.collider.GetComponent<BaseInteractableObject>();
-			if (_interactableObject)
-			{
-				OnHitInteractable();
+				Debug.LogError("Interactable object hasn't BaseInteractableObject component.");
+				if (!_interactableObject)
+				{
+					return;
+				}
 			}
 			else
 			{
-				Debug.LogError("Interactable object hasn't BaseInteractableObject component.");
+				var canInteract = CheckCanInteraction(hitInfo.point, newInteractableObject);
+				if (canInteract && !_canInteract)
+				{
+					_signalBus.TryFire(new CanInteractSignal(newInteractableObject));
+				}
+				else if (!canInteract && _canInteract)
+				{
+					_signalBus.TryFire(new CanInteractSignal(null));
+				}
+
+				_canInteract = canInteract;
+			}
+
+			if (_interactableObject)
+			{
+				if (newInteractableObject == _interactableObject)
+				{
+					return;
+				}
+
+				OnLostInteractable();
+			}
+
+			_interactableObject = newInteractableObject;
+			if (_interactableObject)
+			{
+				OnHitInteractable();
 			}
 		}
 
 		public void OnTapAction(InputAction.CallbackContext context)
 		{
+			if (!_canInteract || !_interactableObject)
+			{
+				return;
+			}
+
+			_signalBus.TryFire(new InteractSignal(_interactableObject, gameObject));
+		}
+
+		private bool CheckCanInteraction(Vector3 hitPoint, BaseInteractableObject interactableObject)
+		{
+			if (!interactableObject)
+			{
+				return false;
+			}
+
+			var l = hitPoint - _camera.transform.position;
+			return _touchDistanse * _touchDistanse >= l.sqrMagnitude;
 		}
 
 		private void OnLostInteractable()
